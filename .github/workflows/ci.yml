@@ -5,7 +5,7 @@ on:
     branches: [main]
 jobs:
   check:
-    name: Typecheck and lint
+    name: Check and test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
