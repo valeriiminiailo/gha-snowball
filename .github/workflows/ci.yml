@@ -37,7 +37,7 @@ jobs:
       - name: Cache Next.js build
         uses: actions/cache@v6
         with:
-          path: gha-snowball/.next/cache
+          path: .next/cache
           key: ${{ runner.os }}-nextjs-${{ github.repository }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ github.repository }}-${{ hashFiles('**/pnpm-lock.yaml') }}-
@@ -50,6 +50,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: nextjs-build-gha-snowball
-          path: gha-snowball/.next
+          path: .next
           retention-days: 1
           include-hidden-files: true
