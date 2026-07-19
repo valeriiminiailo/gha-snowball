@@ -45,13 +45,14 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: gha-snowball:latest
+          images: gha-snowball
 
       - name: Build Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: false
+          load: true
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
