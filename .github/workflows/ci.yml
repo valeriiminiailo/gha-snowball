@@ -7,6 +7,9 @@ jobs:
   check:
     name: Check and test
     runs-on: ubuntu-latest
+    concurrency:
+        group: ${{ github.workflow }}-${{ github.ref }}
+        cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
 
@@ -31,5 +34,22 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Cache Next.js build
+        uses: actions/cache@v6
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ github.repository }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ github.repository }}-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-nextjs-${{ github.repository }}-
+
       - name: Build
         run: pnpm build
+
+      - name: Upload Next.js build
+        uses: actions/upload-artifact@v7
+        with:
+          name: nextjs-build-gha-snowball
+          path: .next
+          retention-days: 1
+          include-hidden-files: true
