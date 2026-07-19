@@ -28,5 +28,8 @@
     "eslint-config-prettier": "^10.1.8",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "engines": {
+    "pnpm": ">=10"
   }
 }
