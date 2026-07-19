@@ -1,13 +1,15 @@
 {
   "name": "gha-snowball",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Complete Next.js application with CI/CD",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "format": "prettier --write ."
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "16.2.10",
