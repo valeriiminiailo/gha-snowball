@@ -3,8 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: gha-snowball-image
-    container_name: gha-snowball-container
+    image: gha-snowball:latest
     environment:
       NODE_ENV: production
       PORT: "3000"
