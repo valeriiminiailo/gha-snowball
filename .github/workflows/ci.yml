@@ -23,8 +23,6 @@ jobs:
 
       - name: Type check
         run: pnpm run typecheck
-        # package.json: "type-check": "tsc --noEmit"
 
       - name: Lint
         run: pnpm run lint
-        # package.json: "lint": "eslint . --max-warnings 0"
