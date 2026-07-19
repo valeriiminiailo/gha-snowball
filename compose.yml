@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nextjs-standalone-image
-    container_name: nextjs-standalone-container
+    image: gha-snowball-image
+    container_name: gha-snowball-container
     environment:
       NODE_ENV: production
       PORT: "3000"
