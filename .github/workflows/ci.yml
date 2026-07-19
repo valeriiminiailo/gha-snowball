@@ -27,7 +27,10 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Security audit
+        run: pnpm audit --audit-level=moderate
 
       - name: Type check
         run: pnpm typecheck
