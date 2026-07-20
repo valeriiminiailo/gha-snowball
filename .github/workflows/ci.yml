@@ -56,7 +56,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: gha-snowball
+          images: ghcr.io/${{ github.repository }}
 
       - name: Build Docker image
         uses: docker/build-push-action@v7
