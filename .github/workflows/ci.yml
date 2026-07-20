@@ -66,10 +66,32 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
+          load: ${{ github.event_name == 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Run Docker container
+        run: |
+          docker run -d \
+            --name gha-snowball-test \
+            -p 3000:3000 \
+            ghcr.io/${{ github.repository }}:latest
+
+      - name: Health check
+        run: |
+          for i in {1..10}; do
+            if curl -f http://localhost:3000; then
+              exit 0
+            fi
+            sleep 3
+          done
+          exit 1
+
+      - name: Stop Docker container
+        if: always()
+        run: docker stop gha-snowball-test
 
       - name: Run Trivy vulnerability scan
         if: github.event_name == 'push'
