@@ -77,6 +77,18 @@ jobs:
         with:
           image-ref: ghcr.io/${{ github.repository }}:latest
           format: table
+          output: trivy-summary.txt
           ignore-unfixed: true
           vuln-type: os,library
           severity: CRITICAL,HIGH
+
+      - name: Add Trivy report to summary
+        if: github.event_name == 'push'
+        run: |
+          {
+            echo "## Trivy Vulnerability Scan"
+            echo ""
+            echo '```'
+            cat trivy-summary.txt
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
