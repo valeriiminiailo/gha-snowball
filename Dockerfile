@@ -1,10 +1,4 @@
-# ============================================
-# Multi-stage Dockerfile tuned for this Next.js + pnpm app
-# - Uses BuildKit cache mounts for pnpm store to speed iterative builds
-# - Keeps install and build separate to leverage layer caching
-# - Copies project pnpm config (.npmrc, pnpm-lock.yaml) so installs are reproducible
-# NOTE: This file expects BuildKit (DOCKER_BUILDKIT=1) for cache mounts to work.
-ARG NODE_VERSION=24-bullseye-slim
+ARG NODE_VERSION=24-bookworm-slim
 
 FROM node:${NODE_VERSION} AS dependencies
 WORKDIR /app
